@@ -180,7 +180,7 @@ public abstract class BaseAuditRepositoryController<E extends BaseEntity, R exte
      * @param entityId entity id
      * @return response entity
      */
-// TODO: 11/12/19 sonra tamamlanacak
+
     @GetMapping("/degisiklik/{entityId}")
     @PreAuthorize(value = "hasAuthority('LOG_GORUNTULE')")
     public ResponseEntity<List<AuditChangeDTO>> degisiklikleriGetir(@PathVariable(value = "entityId") Long entityId) {
