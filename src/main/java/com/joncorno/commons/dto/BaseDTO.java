@@ -1,13 +1,12 @@
 package com.joncorno.commons.dto;
 
-import lombok.Getter;
-import lombok.Setter;
-
 import java.io.Serializable;
 import java.time.Instant;
-import java.util.Objects;
 
 import com.joncorno.commons.util.AktifPasifEnum;
+
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  * Base dto sınıfı.
@@ -44,7 +43,7 @@ public abstract class BaseDTO implements Serializable {
     /**
      * Version.
      */
-    private Integer version = new Integer(0);
+    private Integer version = 0;
 
     /**
      * Eklenme tarihi.

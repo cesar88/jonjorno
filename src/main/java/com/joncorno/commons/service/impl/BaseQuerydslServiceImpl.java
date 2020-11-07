@@ -30,11 +30,11 @@ import java.util.List;
  * @param <E>  tipinde parametre
  * @param <Q>  tipinde parametre
  * @param <D>  tipinde parametre
- * @param <BQ> tipinde parametre
+ * @param <B> tipinde parametre
  * @param <M>  tipinde parametre
  */
 public abstract class BaseQuerydslServiceImpl<T extends BaseDTO, E extends BaseEntity,
-        Q extends EntityPathBase<E>, D extends BaseDAO<E>, BQ extends BaseQuerydslDAO<E, Q>, M extends TemplateMapper<E, T>>
+        Q extends EntityPathBase<E>, D extends BaseDAO<E>, B extends BaseQuerydslDAO<E, Q>, M extends TemplateMapper<E, T>>
         extends BaseServiceImpl<T, E, D, M>
         implements BaseQuerydslService<T> {
 
@@ -50,7 +50,7 @@ public abstract class BaseQuerydslServiceImpl<T extends BaseDTO, E extends BaseE
     /**
      * Base query dsl dao.
      */
-    protected BQ baseQueryDslDao;
+    protected B baseQueryDslDao;
 
     /**
      * Yeni bir Base querydsl service sınıfı örneği oluşturur.
@@ -60,7 +60,7 @@ public abstract class BaseQuerydslServiceImpl<T extends BaseDTO, E extends BaseE
      * @param baseQueryDslDao base query dsl dao
      * @param mapperClass     mapper class
      */
-    public BaseQuerydslServiceImpl(Class<E> eClass, D baseDAO, BQ baseQueryDslDao, Class<M> mapperClass) {
+    public BaseQuerydslServiceImpl(Class<E> eClass, D baseDAO, B baseQueryDslDao, Class<M> mapperClass) {
         super(mapperClass, baseDAO);
         this.baseDAO = baseDAO;
         this.eClass = eClass;
@@ -96,7 +96,6 @@ public abstract class BaseQuerydslServiceImpl<T extends BaseDTO, E extends BaseE
 
         if (filterDTO.getPage() != null && filterDTO.getSize() != null) {
             Pageable pageable = PageRequest.of(filterDTO.getPage(), filterDTO.getSize());
-            try {
                 if (filterDTO.getSortField() != null && filterDTO.getSiralama().equals(ResultOrderEnum.DESCENDING.getKey()))
                     results = baseQueryDslDao.findAll(filterPredicateBuilder.build(),
                             PageRequest.of(filterDTO.getPage(), filterDTO.getSize(), Sort.by(Sort.Order.by(filterDTO.getSortField())).descending()));
@@ -105,26 +104,16 @@ public abstract class BaseQuerydslServiceImpl<T extends BaseDTO, E extends BaseE
                             PageRequest.of(filterDTO.getPage(), filterDTO.getSize(), Sort.by(Sort.Order.by(filterDTO.getSortField())).ascending()));
                 else
                     results = baseQueryDslDao.findAll(filterPredicateBuilder.build(), pageable);
-            } catch (Exception ex) {
-                logger.error(ex);
-            }
         } else {
-            try {
                 results = baseQueryDslDao.findAll(filterPredicateBuilder.build());
-            } catch (Exception ex) {
-                logger.error(ex);
-            }
         }
 
-        if (results != null) {
-            List<T> dersDTOList = new ArrayList<>();
+        List<T> dersDTOList = new ArrayList<>();
             for (E e : results) {
                 dersDTOList.add(mapper.toDto(e));
-            }
-            return dersDTOList;
         }
 
-        return null;
+        return dersDTOList;
     }
 
     /**

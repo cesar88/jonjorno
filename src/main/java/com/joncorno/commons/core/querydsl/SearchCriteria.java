@@ -16,6 +16,10 @@ import java.io.Serializable;
 public class SearchCriteria implements Serializable {
 
     /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	/**
      * Key.
      */
     private String key;
@@ -26,7 +30,7 @@ public class SearchCriteria implements Serializable {
     /**
      * Value.
      */
-    private Object value;
+    private transient Object value;
 
 
 }

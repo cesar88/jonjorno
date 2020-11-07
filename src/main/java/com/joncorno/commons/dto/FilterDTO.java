@@ -15,6 +15,10 @@ import com.joncorno.commons.core.querydsl.SearchCriteria;
 public class FilterDTO implements Serializable {
 
     /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	/**
      * Search criteria list.
      */
     private List<SearchCriteria> searchCriteriaList;

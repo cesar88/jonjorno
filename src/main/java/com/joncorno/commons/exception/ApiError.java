@@ -1,10 +1,9 @@
 package com.joncorno.commons.exception;
 
-import org.springframework.http.HttpStatus;
-
 import java.io.Serializable;
 import java.sql.Timestamp;
-import java.util.List;
+
+import org.springframework.http.HttpStatus;
 
 /**
  * Api error sınıfı.

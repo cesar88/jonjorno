@@ -69,7 +69,6 @@ public abstract class BaseAuditRepositoryController<E extends BaseEntity, R exte
         this.clazz = clazz;
     }
 
-    // TODO: 11/1/19 loglari goruntuleme yetkileri ekle preauthorize
 
     /**
      * verilen obje id'sine gore o objenin audit gecmisini doner

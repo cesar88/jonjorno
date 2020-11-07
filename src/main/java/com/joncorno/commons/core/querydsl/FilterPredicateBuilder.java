@@ -45,7 +45,7 @@ public class FilterPredicateBuilder<T extends BaseEntity> {
      * @param value     value
      * @return filter predicate builder
      */
-    public FilterPredicateBuilder with(
+    public FilterPredicateBuilder<T> with(
             String key, String operation, Object value) {
 
         params.add(new SearchCriteria(key, operation, value));
@@ -62,13 +62,13 @@ public class FilterPredicateBuilder<T extends BaseEntity> {
             return null;
         }
 
-        List predicates = params.stream().map(param -> {
-            FilterPredicate predicate = new FilterPredicate(param);
+        List<BooleanExpression> predicates = params.stream().map(param -> {
+            FilterPredicate<T> predicate = new FilterPredicate<>(param);
             return predicate.getPredicate(clazz);
         }).filter(Objects::nonNull).collect(Collectors.toList());
 
         BooleanBuilder result = new BooleanBuilder();
-        for (Object predicate : predicates) {
+        for (BooleanExpression predicate : predicates) {
             result.and((Predicate) predicate);
         }
         return result;

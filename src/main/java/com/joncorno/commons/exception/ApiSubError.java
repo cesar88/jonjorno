@@ -7,14 +7,11 @@ import java.util.Objects;
  *
  * @author  Fatih Goken 
  */
-public abstract class ApiSubError {
-}
-
 
 /**
  * Api validation error sınıfı.
  */
-class ApiValidationError extends ApiSubError {
+class ApiValidationError  {
     /**
      * Object.
      */

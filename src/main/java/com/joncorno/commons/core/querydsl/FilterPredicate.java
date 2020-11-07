@@ -48,6 +48,8 @@ public class FilterPredicate<T extends BaseEntity> {
                     return path.loe(value);
                 case FilterOperationConstants.NOT_EQUALS_OPERATION:
                     return path.ne(value);
+                default:
+                	return null;
             }
         } else {
             StringPath path = entityPath.getString(criteria.getKey());

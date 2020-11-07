@@ -45,7 +45,7 @@ public final class SecurityUtils {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         KullaniciImmutable kullaniciImmutable = new KullaniciImmutable();
         if (auth != null && auth instanceof OAuth2Authentication) {
-            LinkedHashMap properties = (LinkedHashMap) (((OAuth2Authentication) auth).getUserAuthentication().getDetails());
+            LinkedHashMap<Object, Object> properties = (LinkedHashMap) (((OAuth2Authentication) auth).getUserAuthentication().getDetails());
             LinkedHashMap userProperties = new LinkedHashMap();
             try {
                 if (!(properties.get(PRINCIPAL) instanceof String))
